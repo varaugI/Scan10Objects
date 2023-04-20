@@ -17,14 +17,18 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <div id="webcam-container"></div>
+                    <div id="webcam-container">
+			<img id="img" src="camera.png" style="width: 415px;height: 425px;"></div>
                 <div class="col">
                     	<button class="btn btn-success" onclick="init()" style="float: right;color: whitesmoke;">Start</button>
-			 &nbsp;
 			<button class="btn btn-danger" onclick="stopWC()" style="float: right;color: whitesmoke;">Stop</button>
                 </div>
             </div>
         </div>
+		div id="class">
+            <div class="container">
+		     Bottle, Pen, Coin,Mobile, Watch, Notebook, Desktop, Chair, Hair, Dog.
+		</div></div>
         <div><h2 style="text-align: center;color:blue">Results</h2></div>
         <div id="label-container" style="font-size: x-large;text-align: center;font-weight: bolder;"></div>
         <script type="text/javascript">
@@ -48,9 +52,8 @@
         
                 document.getElementById("webcam-container").appendChild(webcam.canvas);
                 labelContainer = document.getElementById("label-container");
-                for (let i = 0; i < maxPredictions; i++) { 
-                    labelContainer.appendChild(document.createElement("div"));
-                }
+                document.getElementById('startS').hidden = true;
+                document.getElementById('stopS').hidden = false;
             }
         
             async function loop() {
@@ -65,13 +68,27 @@
                     const classPrediction =
                         prediction[i].className + ": " + prediction[i].probability.toFixed(2) * 100 + '%';
                     if(prediction[i].probability.toFixed(2) * 100>90){
-                        labelContainer.childNodes[i].innerHTML = classPrediction;
+                        labelContainer.childNodes[i].innerHTML = prediction[i].className;
 		    }
                 }
+		    hide();
             }
 		function stopWC(){
-			webcam.stop();
+			 document.getElementById("startS").hidden = false;
+                	document.getElementById("stopS").hidden = true;
+                	document.getElementById("description").hidden = true;
+                	labelContainer.innerHTML = "";
+                	document.getElementById("class").hidden = true;
+                	webcam.stop();
+                	document.getElementById("webcam-container").removeChild(webcam.canvas);
+                	document.getElementById("img").hidden = false;
 		}
+		  function hide(){
+                	document.getElementById("startS").hidden = true;
+                	document.getElementById("stopS").hidden = false;
+                	document.getElementById("class").hidden = true;
+                	document.getElementById("img").hidden = true;
+		    }
         </script>
 
     </body>
