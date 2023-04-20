@@ -65,7 +65,7 @@
                     const classPrediction =
                         prediction[i].className + ": " + prediction[i].probability.toFixed(2) * 100 + '%';
                     if(prediction[i].probability.toFixed(2) * 100>90){
-                        labelContainer.childNodes[i].innerHTML = prediction[i].className
+                        labelContainer.childNodes[i].innerHTML = classPrediction;
                     }
                 }
             }
