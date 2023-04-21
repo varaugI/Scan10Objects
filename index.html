@@ -52,9 +52,11 @@
         <div id="label-container" style="font-size: x-large;text-align: center;font-weight: bolder;"></div>
 
         <script type="text/javascript">
+            
             const URL = "./";  
-            let model, webcam, label, labelContainer, name, maxPredictions,detected;
+            let model, webcam, label, labelContainer, maxPredictions,detected;
             labelContainer = document.getElementById("label-container");
+            detected = false;
 
             async function init() {
                 const modelURL = "./model.json";
@@ -82,45 +84,59 @@
 
             async function predict() {
                 const prediction = await model.predict(webcam.canvas);
+                detected = false;
                 for (let i = 0; i < maxPredictions; i++) {
                     if(prediction[i].probability.toFixed(2) * 100>97){
                         if(prediction[i].className === "BOTTLE" ){
-                            labelContainer.innerHTML = "BOTTLE";    
+                            label = "BOTTLE";    
                         }
                         else if(prediction[i].className === "PEN" ){
-                            labelContainer.innerHTML = "PEN";
+                            label = "PEN";
                         }
                         else if(prediction[i].className === "COIN" ){
-                            labelContainer.innerHTML = "COIN";
+                            label = "COIN";
                         }
                         else if(prediction[i].className === "MOBILE" ){
-                            labelContainer.innerHTML = "MOBILE";
+                            label = "MOBILE";
                         }
                         else if(prediction[i].className === "WATCH" ){
-                            labelContainer.innerHTML = "WATCH";
+                            label = "WATCH";
                         }
                         else if(prediction[i].className === "NOTEBOOK" ){
-                            labelContainer.innerHTML = "NOTEBOOK";
+                            label = "NOTEBOOK";
                         }
                         else if(prediction[i].className === "DESKTOP" ){
-                            labelContainer.innerHTML = "DESKTOP";
+                            label = "DESKTOP";
                         }
                         else if(prediction[i].className === "CHAIR" ){
-                            labelContainer.innerHTML = "CHAIR";
+                            label = "CHAIR";
                         }
                         else if(prediction[i].className === "HAIR" ){
-                            labelContainer.innerHTML = "HAIR";
+                            label = "HAIR";
                         }
                         else if(prediction[i].className === "DOG" ){
-                            labelContainer.innerHTML = "DOG";
+                            label = "DOG";
                         }
-                        document.getElementById("startS").hidden = true;
-                        document.getElementById("stopS").hidden = false;
-                        document.getElementById("class").hidden = true;
-                        document.getElementById("img").hidden = true;
+                        hide();
+                        detected = true;
+                        break;
                     }
                 }
+                if (detected) {
+                    labelContainer.innerHTML = label;
+                } 
+                else {
+                    labelContainer.innerHTML = "";
+                    document.getElementById("class").hidden = false;;
+                }
             }
+
+            function hide(){
+                document.getElementById("startS").hidden = true;
+                document.getElementById("stopS").hidden = false;
+                document.getElementById("class").hidden = true;
+                document.getElementById("img").hidden = true;
+		    }
 
             function stopWC(){
                 window.speechSynthesis.cancel();
