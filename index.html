@@ -52,13 +52,12 @@
         <div id="label-container" style="font-size: x-large;text-align: center;font-weight: bolder;"></div>
 
         <script type="text/javascript">
-            const URL = "./";  
             let model, webcam, labelContainer, name, maxPredictions;
             let detected = false;
 
             async function init() {
-                const modelURL = URL + "model.json";
-                const metadataURL = URL + "metadata.json";      
+                const modelURL = "./model.json";
+                const metadataURL = "./metadata.json";      
                 model = await tmImage.load(modelURL, metadataURL);
                 maxPredictions = model.getTotalClasses();        
                 const flip = false; 
