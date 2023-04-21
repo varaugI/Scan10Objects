@@ -49,11 +49,12 @@
                 </div>
 		    </div>
         </div>
+        <div><h2 style="text-align: center;color:blue">Results</h2></div>
         <div id="label-container" style="font-size: x-large;text-align: center;font-weight: bolder;"></div>
 
         <script type="text/javascript">
-            let model, webcam, labelContainer, name, maxPredictions;
-            let detected = false;
+            const URL = "./";  
+            let model, webcam, labelContainer, maxPredictions;
 
             async function init() {
                 const modelURL = "./model.json";
@@ -83,52 +84,43 @@
 
             async function predict() {
                 const prediction = await model.predict(webcam.canvas);
-                detected = false;
                 for (let i = 0; i < maxPredictions; i++) {
                     if(prediction[i].probability.toFixed(2) * 100>97){
                         if(prediction[i].className === "BOTTLE" ){
-                            name = "BOTTLE";    
+                            labelContainer.innerHTML = "BOTTLE";    
                         }
                         else if(prediction[i].className === "PEN" ){
-                            name = "PEN";
+                            labelContainer.innerHTML = "PEN";
                         }
                         else if(prediction[i].className === "COIN" ){
-                            name = "COIN";
+                            labelContainer.innerHTML = "COIN";
                         }
                         else if(prediction[i].className === "MOBILE" ){
-                            name = "MOBILE";
+                            labelContainer.innerHTML = "MOBILE";
                         }
                         else if(prediction[i].className === "WATCH" ){
-                            name = "WATCH";
+                            labelContainer.innerHTML = "WATCH";
                         }
                         else if(prediction[i].className === "NOTEBOOK" ){
-                            name = "NOTEBOOK";
+                            labelContainer.innerHTML = "NOTEBOOK";
                         }
                         else if(prediction[i].className === "DESKTOP" ){
-                            name = "DESKTOP";
+                            labelContainer.innerHTML = "DESKTOP";
                         }
                         else if(prediction[i].className === "CHAIR" ){
-                            name = "CHAIR";
+                            labelContainer.innerHTML = "CHAIR";
                         }
                         else if(prediction[i].className === "HAIR" ){
-                            name = "HAIR";
+                            labelContainer.innerHTML = "HAIR";
                         }
                         else if(prediction[i].className === "DOG" ){
-                            name = "DOG";
+                            labelContainer.innerHTML = "DOG";
                         }
-                        detected = true;
                         document.getElementById("startS").hidden = true;
                         document.getElementById("stopS").hidden = false;
                         document.getElementById("class").hidden = true;
                         document.getElementById("img").hidden = true;
                     }
-                }
-                if (detected) {
-                    labelContainer.innerHTML = name;
-                }
-                else {
-                    labelContainer.innerHTML = "";
-                    document.getElementById("class").hidden = false;
                 }
             }
 
