@@ -12,13 +12,13 @@
         <script src="./js/jquery.min.js"></script>      
     </head>
     <body>
-        <h1 style="background-color: magenta;text-align: center;">CLASSIFY</h1>
+        <h1 style="background-color: magenta;text-align: center;">CLASSIFY OBJECTS</h1>
         <div id="webcam-container"></div>
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <div id="webcam-container">
-			<img id="img" src="camera.png" style="width: 415px;height: 425px;"></div>
+                    <div id="webcam-container" style="width: 415px;height: 425px;">
+			        <img id="img" src="camera.png" style="width: 415px;height: 425px;"></div>
                 <div class="col">
                     	<button class="btn btn-success" id="startS" onclick="init()" style="float: right;color: whitesmoke;">Start</button>
 			            <button class="btn btn-danger" id="stopS" onclick="stopWC()" style="float: right;color: whitesmoke;" hidden>Stop</button>
@@ -54,7 +54,6 @@
 
         <script type="text/javascript">
 
-            const URL = "./";  
             let model, webcam, label, labelContainer, maxPredictions,detected;
             labelContainer = document.getElementById("label-container");
             detected = false;
