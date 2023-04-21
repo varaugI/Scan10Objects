@@ -20,8 +20,8 @@
                     <div id="webcam-container">
 			<img id="img" src="camera.png" style="width: 415px;height: 425px;"></div>
                 <div class="col">
-                    	<button class="btn btn-success" onclick="init()" style="float: right;color: whitesmoke;">Start</button>
-			            <button class="btn btn-danger" onclick="stopWC()" style="float: right;color: whitesmoke;" hidden>Stop</button>
+                    	<button class="btn btn-success" id="startS" onclick="init()" style="float: right;color: whitesmoke;">Start</button>
+			            <button class="btn btn-danger" id="stopS" onclick="stopWC()" style="float: right;color: whitesmoke;" hidden>Stop</button>
                 </div>
             </div>
         </div>
@@ -60,11 +60,7 @@
                 const modelURL = "./model.json";
                 const metadataURL = "./metadata.json";      
                 model = await tmImage.load(modelURL, metadataURL);
-                maxPredictions = model.getTotalClasses();  
-                document.getElementById("startS").hidden = true;
-                document.getElementById("stopS").hidden = false;
-                document.getElementById("class").hidden = true;
-                document.getElementById("img").hidden = true;      
+                maxPredictions = model.getTotalClasses();        
                 const flip = false; 
                 webcam = new tmImage.Webcam(415, 425, flip);
                 const facingMode = {exact: "environment"};
@@ -72,6 +68,10 @@
                 await webcam.play();
                 window.requestAnimationFrame(loop);      
                 document.getElementById("webcam-container").appendChild(webcam.canvas);
+                document.getElementById("startS").hidden = true;
+                document.getElementById("stopS").hidden = false;
+                document.getElementById("class").hidden = true;
+                document.getElementById("img").hidden = true;
             }
 
             async function loop() {
