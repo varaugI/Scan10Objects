@@ -34,22 +34,20 @@
         <script type="text/javascript">
 
             const URL = "./";
-            let model, webcam, labelContainer, maxPredictions;
+            let model, webcam, label, labelContainer, name, maxPredictions,detected;
+            detected = false;
 
             async function init() {
                 const modelURL = URL + "model.json";
-                const metadataURL = URL + "metadata.json";
-        
+                const metadataURL = URL + "metadata.json";      
                 model = await tmImage.load(modelURL, metadataURL);
-                maxPredictions = model.getTotalClasses();
-        
+                maxPredictions = model.getTotalClasses();        
                 const flip = false; 
-                webcam = new tmImage.Webcam(500, 400, flip);
+                webcam = new tmImage.Webcam(415, 425, flip);
                 const facingMode = {exact: "environment"};
                 await webcam.setup({facingMode});
                 await webcam.play();
-                window.requestAnimationFrame(loop);
-        
+                window.requestAnimationFrame(loop);      
                 document.getElementById("webcam-container").appendChild(webcam.canvas);
                 labelContainer = document.getElementById("label-container");
                 labelContainer.innerHTML = "";
@@ -59,19 +57,27 @@
 
             async function loop() {
                 webcam.update(); 
-                await predict();
-                window.requestAnimationFrame(loop);
-            }
-
-            async function predict() {
                 const prediction = await model.predict(webcam.canvas);
+                detected = false;
                 for (let i = 0; i < maxPredictions; i++) {
-                    const classPrediction =
-                        prediction[i].className + ": " + prediction[i].probability.toFixed(2) * 100 + '%';
-                    if(prediction[i].probability.toFixed(2) * 100>95){
-                        labelContainer.childNodes[i].innerHTML = prediction[i].className;
-		            }
+                    if(prediction[i].probability.toFixed(2) * 100 > 95){
+                        name = prediction[i].className;
+                        
+                    }
+                    hide();
+                    detected = true;
+                    break;
                 }
+                if (detected) {
+                        labelContainer.innerHTML = name;
+                }
+                else {
+                   
+                    labelContainer.innerHTML = "";
+                    document.getElementById("class").hidden = false;
+
+                }
+                window.requestAnimationFrame(loop);
             }
 
 		    function stopWC(){
