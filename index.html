@@ -139,18 +139,6 @@
                 document.getElementById("class").hidden = true;
                 document.getElementById("img").hidden = true;
 		    }
-
-            function stopWC(){
-                document.getElementById("startS").hidden = false;
-                document.getElementById("stopS").hidden = true;
-                document.getElementById("pause").innerHTML = "";
-                labelContainer.innerHTML = "";
-                document.getElementById("class").hidden = false;
-                document.getElementById("webcam-container").removeChild(webcam.canvas);
-                webcam.stop();
-                document.getElementById("webcam-container").src = "";
-                document.getElementById("img").hidden = false;
-            }
             
         </script>
     </body>
