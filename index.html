@@ -141,13 +141,11 @@
             function stopWC(){
                 document.getElementById("startS").hidden = false;
                 document.getElementById("stopS").hidden = true;
-                document.getElementById("description").hidden = true;
+                document.getElementById("img").hidden = false;
                 labelContainer.innerHTML = "";
-                setTimeout(()=>{init(); }, 1000);
                 document.getElementById("class").hidden = false;
                 webcam.stop();
                 document.getElementById("webcam-container").removeChild(webcam.canvas);
-                document.getElementById("img").hidden = false;
             }
             
         </script>
