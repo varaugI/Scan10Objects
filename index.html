@@ -49,12 +49,12 @@
                 </div>
 		    </div>
         </div>
-        <div><h2 style="text-align: center;color:blue">Results</h2></div>
         <div id="label-container" style="font-size: x-large;text-align: center;font-weight: bolder;"></div>
 
         <script type="text/javascript">
             const URL = "./";  
             let model, webcam, labelContainer, maxPredictions;
+            labelContainer = document.getElementById("label-container");
 
             async function init() {
                 const modelURL = "./model.json";
@@ -68,8 +68,6 @@
                 await webcam.play();
                 window.requestAnimationFrame(loop);      
                 document.getElementById("webcam-container").appendChild(webcam.canvas);
-                labelContainer = document.getElementById("label-container");
-                labelContainer.innerHTML = "";
                 document.getElementById("startS").hidden = true;
                 document.getElementById("stopS").hidden = false;
                 document.getElementById("class").hidden = true;
