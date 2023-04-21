@@ -52,29 +52,31 @@
         
                 document.getElementById("webcam-container").appendChild(webcam.canvas);
                 labelContainer = document.getElementById("label-container");
-                document.getElementById('startS').hidden = true;
-                document.getElementById('stopS').hidden = false;
+                labelContainer.innerHTML = "";
+                document.getElementById("img").hidden = true;
+                document.getElementById("class").hidden = true;
             }
-        
+
             async function loop() {
                 webcam.update(); 
                 await predict();
                 window.requestAnimationFrame(loop);
             }
+
             async function predict() {
-        
                 const prediction = await model.predict(webcam.canvas);
                 for (let i = 0; i < maxPredictions; i++) {
                     const classPrediction =
                         prediction[i].className + ": " + prediction[i].probability.toFixed(2) * 100 + '%';
                     if(prediction[i].probability.toFixed(2) * 100>90){
                         labelContainer.childNodes[i].innerHTML = prediction[i].className;
-		    }
+		            }
                 }
-		    hide();
+		        hide();
             }
-		function stopWC(){
-			 document.getElementById("startS").hidden = false;
+
+		    function stopWC(){
+			    document.getElementById("startS").hidden = false;
                 	document.getElementById("stopS").hidden = true;
                 	document.getElementById("description").hidden = true;
                 	labelContainer.innerHTML = "";
@@ -82,8 +84,9 @@
                 	webcam.stop();
                 	document.getElementById("webcam-container").removeChild(webcam.canvas);
                 	document.getElementById("img").hidden = false;
-		}
-		  function hide(){
+		    }
+            
+		    function hide(){
                 	document.getElementById("startS").hidden = true;
                 	document.getElementById("stopS").hidden = false;
                 	document.getElementById("class").hidden = true;
