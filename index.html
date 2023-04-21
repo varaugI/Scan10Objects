@@ -65,6 +65,9 @@
                 labelContainer.innerHTML = "";
                 document.getElementById("img").hidden = true;
                 document.getElementById("class").hidden = true;
+                for (let i = 0; i < maxPredictions; i++) { // and class labels
+                    labelContainer.appendChild(document.createElement("div"));
+                }
             }
 
             async function loop() {
@@ -120,13 +123,13 @@
 
 		    function stopWC(){
 			    document.getElementById("startS").hidden = false;
-                	document.getElementById("stopS").hidden = true;
-                	document.getElementById("description").hidden = true;
-                	labelContainer.innerHTML = "";
-                	document.getElementById("class").hidden = true;
-                	webcam.stop();
-                	document.getElementById("webcam-container").removeChild(webcam.canvas);
-                	document.getElementById("img").hidden = false;
+                document.getElementById("stopS").hidden = true;
+                document.getElementById("description").hidden = true;
+                labelContainer.innerHTML = "";
+                document.getElementById("class").hidden = true;
+                webcam.stop();
+                document.getElementById("webcam-container").removeChild(webcam.canvas);
+                document.getElementById("img").hidden = false;
 		    }
 
 		    function hide(){
