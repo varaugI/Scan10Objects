@@ -146,12 +146,11 @@
                 document.getElementById("pause").hidden = true;
                 labelContainer.innerHTML = "";
                 document.getElementById("class").hidden = false;
+                webcam.stop();
                 document.getElementById("webcam-container").removeChild(webcam.canvas);
+                document.getElementById("img").hidden = false;
             }
             
-            $("#stopS").click(function(){
-                webcam.stop();
-            })
         </script>
     </body>
 </html>
