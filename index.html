@@ -57,6 +57,7 @@
             let model, webcam, label, labelContainer, maxPredictions,detected;
             labelContainer = document.getElementById("label-container");
             detected = false;
+	    $("#startS").click(function(){$("#startS").hide()});
 
             async function init() {
                 const modelURL = "./model.json";
