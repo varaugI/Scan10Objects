@@ -50,6 +50,7 @@
                 </div>
 		    </div>
         </div>
+        <div id="pause"></div>
         <div id="label-container" style="font-size: x-large;text-align: center;font-weight: bolder;"></div>
 
         <script type="text/javascript">
@@ -124,6 +125,7 @@
                 }
                 if (detected) {
                     labelContainer.innerHTML = label;
+                    document.getElementById("pause").innerHTML = "Click now to have the identity remain when not detected";
                 } 
                 else {
                     labelContainer.innerHTML = "";
@@ -144,6 +146,7 @@
                 document.getElementById("img").hidden = false;
                 labelContainer.innerHTML = "";
                 document.getElementById("class").hidden = false;
+                document.getElementById("webcam-container").hidden = true;
                 webcam.stop();
                 document.getElementById("webcam-container").removeChild(webcam.canvas);
             }
