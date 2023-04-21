@@ -60,7 +60,11 @@
                 const modelURL = "./model.json";
                 const metadataURL = "./metadata.json";      
                 model = await tmImage.load(modelURL, metadataURL);
-                maxPredictions = model.getTotalClasses();        
+                maxPredictions = model.getTotalClasses();  
+                document.getElementById("startS").hidden = true;
+                document.getElementById("stopS").hidden = false;
+                document.getElementById("class").hidden = true;
+                document.getElementById("img").hidden = true;      
                 const flip = false; 
                 webcam = new tmImage.Webcam(415, 425, flip);
                 const facingMode = {exact: "environment"};
@@ -68,10 +72,6 @@
                 await webcam.play();
                 window.requestAnimationFrame(loop);      
                 document.getElementById("webcam-container").appendChild(webcam.canvas);
-                document.getElementById("startS").hidden = true;
-                document.getElementById("stopS").hidden = false;
-                document.getElementById("class").hidden = true;
-                document.getElementById("img").hidden = true;
             }
 
             async function loop() {
