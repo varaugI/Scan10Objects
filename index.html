@@ -116,16 +116,16 @@
                         else if(prediction[i].className === "DOG" ){
                             labelContainer.innerHTML = "DOG";
                         }
-                        hide();
+                        document.getElementById("startS").hidden = true;
+                        document.getElementById("stopS").hidden = false;
+                        document.getElementById("class").hidden = true;
+                        document.getElementById("img").hidden = true;
                     }
                 }
             }
 
 		    function hide(){
-                document.getElementById("startS").hidden = true;
-                document.getElementById("stopS").hidden = false;
-                document.getElementById("class").hidden = true;
-                document.getElementById("img").hidden = true;
+                
 		    }
 
             function stopWC(){
