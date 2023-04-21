@@ -43,12 +43,10 @@
         </div>
         <div><h2 style="text-align: center;color:blue">Results</h2></div>
         <div id="label-container" style="font-size: x-large;text-align: center;font-weight: bolder;"></div>
+
         <script type="text/javascript">
-
-            const URL = "./";
-            let model, webcam, label, labelContainer, name, maxPredictions,detected;
-            detected = false;
-
+            const URL = "./";  
+            let model, webcam, labelContainer, maxPredictions;
             async function init() {
                 const modelURL = URL + "model.json";
                 const metadataURL = URL + "metadata.json";      
@@ -62,81 +60,61 @@
                 window.requestAnimationFrame(loop);      
                 document.getElementById("webcam-container").appendChild(webcam.canvas);
                 labelContainer = document.getElementById("label-container");
-                labelContainer.innerHTML = "";
-                document.getElementById("img").hidden = true;
-                document.getElementById("class").hidden = true;
-                for (let i = 0; i < maxPredictions; i++) { // and class labels
-                    labelContainer.appendChild(document.createElement("div"));
-                }
+                document.getElementById('startS').hidden = true;
+                document.getElementById('stopS').hidden = false;
             }
-
             async function loop() {
                 webcam.update(); 
-                const prediction = await model.predict(webcam.canvas);
-                detected = false;
-                for (let i = 0; i < maxPredictions; i++) {
-                    if(prediction[i].probability.toFixed(2) * 100 > 95){
-                        if(prediction[i].className === "BOTTLE" ){
-                            name = "bottle here, what to do?";     
-                        }
-                        else if(prediction[i].className === "PEN" ){
-                            name = "A pen here";
-                        }
-                        else if(prediction[i].className === "COIN" ){
-                            name = "A coin to toss";
-                        }
-                        else if(prediction[i].className === "MOBILE" ){
-                            name = "A phone to remember";
-                        }
-                        else if(prediction[i].className === "WATCH" ){
-                            name = "Watch it, it's a watch";
-                        }
-                        else if(prediction[i].className === "NOTEBOOK" ){
-                            name = "Write it down, a notebook";
-                        }
-                        else if(prediction[i].className === "DESKTOP" ){
-                            name = "A desktop";
-                        }
-                        else if(prediction[i].className === "CHAIR" ){
-                            name = "Sitdown, it's a chair";
-                        }
-                        else if(prediction[i].className === "HAIR" ){
-                            name=  "hair";
-                        }
-                        else if(prediction[i].className === "DOG" ){
-                            name = "Dog";
-                        }
-                    }
-                    hide();
-                    detected = true;
-                    break;
-                }
-                if (detected) {
-                    labelContainer.innerHTML = name;
-                }
-                else {
-                    labelContainer.innerHTML = "";
-                    document.getElementById("class").hidden = false;
-                }
+                await predict();
                 window.requestAnimationFrame(loop);
             }
-
+            async function predict() {
+                const prediction = await model.predict(webcam.canvas);
+                for (let i = 0; i < maxPredictions; i++) {
+                    if(prediction[i].probability.toFixed(2) * 100>97){
+                        if(prediction[i].className === "BOTTLE" ){
+                            labelContainer.innerHTML = "BOTTLE";    
+                        }
+                        else if(prediction[i].className === "PEN" ){
+                            labelContainer.innerHTML = "PEN";
+                        }
+                        else if(prediction[i].className === "COIN" ){
+                            labelContainer.innerHTML = "COIN";
+                        }
+                        else if(prediction[i].className === "MOBILE" ){
+                            labelContainer.innerHTML = "MOBILE";
+                        }
+                        else if(prediction[i].className === "WATCH" ){
+                            labelContainer.innerHTML = "WATCH";
+                            var msg = "Watch it, it's a watch";
+                        }
+                        else if(prediction[i].className === "NOTEBOOK" ){
+                            labelContainer.childNodes[i].innerHTML = "NOTEBOOK";
+                        }
+                        else if(prediction[i].className === "DESKTOP" ){
+                            labelContainer.innerHTML = "DESKTOP";
+                        }
+                        else if(prediction[i].className === "CHAIR" ){
+                            labelContainer.innerHTML = "CHAIR";
+                        }
+                        else if(prediction[i].className === "HAIR" ){
+                            labelContainer.innerHTML = "HAIR";
+                        }
+                        else if(prediction[i].className === "DOG" ){
+                            labelContainer.innerHTML = "DOG";
+                        }
+                        else{
+                            labelContainer.innerHTML = "Error loading";
+                        }
+                        stopWC();
+                    }
+                }
+            }
 		    function stopWC(){
-			    document.getElementById("startS").hidden = false;
-                document.getElementById("stopS").hidden = true;
-                document.getElementById("description").hidden = true;
-                labelContainer.innerHTML = "";
-                document.getElementById("class").hidden = true;
-                webcam.stop();
+			    webcam.stop();
                 document.getElementById("webcam-container").removeChild(webcam.canvas);
-                document.getElementById("img").hidden = false;
-		    }
-
-		    function hide(){
-                	document.getElementById("startS").hidden = true;
-                	document.getElementById("stopS").hidden = false;
-                	document.getElementById("class").hidden = true;
-                	document.getElementById("img").hidden = true;
+                document.getElementById('startS').hidden = false;
+                document.getElementById('stopS').hidden = true;
 		    }
         </script>
 
