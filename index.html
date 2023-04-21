@@ -143,14 +143,14 @@
             function stopWC(){
                 document.getElementById("startS").hidden = false;
                 document.getElementById("stopS").hidden = true;
-                document.getElementById("img").hidden = false;
                 labelContainer.innerHTML = "";
                 document.getElementById("class").hidden = false;
-                document.getElementById("webcam-container").hidden = true;
-                webcam.stop();
                 document.getElementById("webcam-container").removeChild(webcam.canvas);
             }
             
+            $("#stopS").click(function(){
+                webcam.stop();
+            })
         </script>
     </body>
 </html>
