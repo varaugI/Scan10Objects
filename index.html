@@ -70,8 +70,10 @@
                 document.getElementById("webcam-container").appendChild(webcam.canvas);
                 labelContainer = document.getElementById("label-container");
                 labelContainer.innerHTML = "";
-                document.getElementById("img").hidden = true;
+                document.getElementById("startS").hidden = true;
+                document.getElementById("stopS").hidden = false;
                 document.getElementById("class").hidden = true;
+                document.getElementById("img").hidden = true;
             }
 
             async function loop() {
