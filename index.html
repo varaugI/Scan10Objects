@@ -27,8 +27,9 @@
         </div>
 		<div id="class">
             <div class="container">
-		     Bottle, Pen, Coin,Mobile, Watch, Notebook, Desktop, Chair, Hair, Dog.
-		</div></div>
+		        Bottle, Pen, Coin,Mobile, Watch, Notebook, Desktop, Chair, Hair, Dog.
+		    </div>
+        </div>
         <div><h2 style="text-align: center;color:blue">Results</h2></div>
         <div id="label-container" style="font-size: x-large;text-align: center;font-weight: bolder;"></div>
         <script type="text/javascript">
@@ -61,21 +62,48 @@
                 detected = false;
                 for (let i = 0; i < maxPredictions; i++) {
                     if(prediction[i].probability.toFixed(2) * 100 > 95){
-                        name = prediction[i].className;
-                        
+                        if(prediction[i].className === "BOTTLE" ){
+                            name = "bottle here, what to do?";     
+                        }
+                        else if(prediction[i].className === "PEN" ){
+                            name = "A pen here";
+                        }
+                        else if(prediction[i].className === "COIN" ){
+                            name = "A coin to toss";
+                        }
+                        else if(prediction[i].className === "MOBILE" ){
+                            name = "A phone to remember";
+                        }
+                        else if(prediction[i].className === "WATCH" ){
+                            labelContainer.innerHTML = "WATCH";
+                            var msg = "Watch it, it's a watch";
+                        }
+                        else if(prediction[i].className === "NOTEBOOK" ){
+                            name = "Write it down, a notebook";
+                        }
+                        else if(prediction[i].className === "DESKTOP" ){
+                            name = "A desktop";
+                        }
+                        else if(prediction[i].className === "CHAIR" ){
+                            name = "Sitdown, it's a chair";
+                        }
+                        else if(prediction[i].className === "HAIR" ){
+                            name=  "hair";
+                        }
+                        else if(prediction[i].className === "DOG" ){
+                            name = "Dog";
+                        }
                     }
                     hide();
                     detected = true;
                     break;
                 }
                 if (detected) {
-                        labelContainer.innerHTML = name;
+                    labelContainer.innerHTML = name;
                 }
                 else {
-                   
                     labelContainer.innerHTML = "";
                     document.getElementById("class").hidden = false;
-
                 }
                 window.requestAnimationFrame(loop);
             }
