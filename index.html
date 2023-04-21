@@ -55,6 +55,7 @@
         <script type="text/javascript">
             const URL = "./";  
             let model, webcam, labelContainer, maxPredictions;
+
             async function init() {
                 const modelURL = URL + "model.json";
                 const metadataURL = URL + "metadata.json";      
@@ -68,8 +69,6 @@
                 window.requestAnimationFrame(loop);      
                 document.getElementById("webcam-container").appendChild(webcam.canvas);
                 labelContainer = document.getElementById("label-container");
-                document.getElementById('startS').hidden = true;
-                document.getElementById('stopS').hidden = false;
                 labelContainer.innerHTML = "";
                 document.getElementById("img").hidden = true;
                 document.getElementById("class").hidden = true;
