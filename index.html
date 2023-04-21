@@ -14,11 +14,11 @@
     <body>
         <h1 style="background-color: magenta;text-align: center;">CLASSIFY OBJECTS</h1>
         <div id="webcam-container"></div>
+        <img id="img" src="camera.png" style="width: 415px;height: 425px;">
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <div id="webcam-container">
-			        <img id="img" src="camera.png" style="width: 415px;height: 425px;"></div>
+                    <div id="pause" class="col" style="text-align: right;font-weight: 200;"></div>
                 <div class="col">
                     	<button class="btn btn-success" id="startS" onclick="init()" style="float: right;color: whitesmoke;">Start</button>
 			            <button class="btn btn-danger" id="stopS" onclick="stopWC()" style="float: right;color: whitesmoke;" hidden>Stop</button>
@@ -50,7 +50,6 @@
                 </div>
 		    </div>
         </div>
-        <div id="pause"></div>
         <div id="label-container" style="font-size: x-large;text-align: center;font-weight: bolder;"></div>
 
         <script type="text/javascript">
@@ -130,6 +129,7 @@
                 else {
                     labelContainer.innerHTML = "";
                     document.getElementById("class").hidden = false;;
+                    document.getElementById("pause").hidden = true;
                 }
             }
 
@@ -143,6 +143,7 @@
             function stopWC(){
                 document.getElementById("startS").hidden = false;
                 document.getElementById("stopS").hidden = true;
+                document.getElementById("pause").hidden = true;
                 labelContainer.innerHTML = "";
                 document.getElementById("class").hidden = false;
                 document.getElementById("webcam-container").removeChild(webcam.canvas);
