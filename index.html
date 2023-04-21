@@ -70,6 +70,9 @@
                 labelContainer = document.getElementById("label-container");
                 document.getElementById('startS').hidden = true;
                 document.getElementById('stopS').hidden = false;
+                labelContainer.innerHTML = "";
+                document.getElementById("img").hidden = true;
+                document.getElementById("class").hidden = true;
             }
             async function loop() {
                 webcam.update(); 
@@ -114,16 +117,28 @@
                         else{
                             labelContainer.innerHTML = "Error loading";
                         }
-                        stopWC();
+                        hide();
                     }
                 }
             }
-		    function stopWC(){
-			    webcam.stop();
-                document.getElementById("webcam-container").removeChild(webcam.canvas);
-                document.getElementById('startS').hidden = false;
-                document.getElementById('stopS').hidden = true;
+		    function hide(){
+                document.getElementById("startS").hidden = true;
+                document.getElementById("stopS").hidden = false;
+                document.getElementById("class").hidden = true;
+                document.getElementById("img").hidden = true;
 		    }
+
+            function stopWC(){
+                window.speechSynthesis.cancel();
+                document.getElementById("startS").hidden = false;
+                document.getElementById("stopS").hidden = true;
+                document.getElementById("description").hidden = true;
+                labelContainer.innerHTML = "";
+                document.getElementById("class").hidden = true;
+                webcam.stop();
+                document.getElementById("webcam-container").removeChild(webcam.canvas);
+                document.getElementById("img").hidden = false;
+            }
         </script>
 
     </body>
